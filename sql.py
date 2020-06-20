@@ -8,6 +8,8 @@ cur = cnx.cursor(dictionary=True)
 
 def read_sql(query_string):
     cur.execute(query_string)
+    # Getting dictionary back from sql server and turning it into a Dataframe
     sql_data = pd.DataFrame(cur.fetchall())
-    sql_data.columns = cur.column_names
+    if not sql_data.empty:
+        sql_data.columns = cur.column_names
     return sql_data
